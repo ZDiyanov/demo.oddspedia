@@ -1,0 +1,17 @@
+@forward "breakpoints";
+@forward "variables";
+
+@use '~/modern-normalize/modern-normalize.css';
+
+body {
+  min-height: 100vh;
+  background: $bg-softgrey;
+  color: $text-secondary;
+  transition: color 0.5s, background-color 0.5s;
+  line-height: 1;
+  font-family: 'Roboto', 'Helvetica Neue', 'Arial', -apple-system, sans-serif;
+  font-size: 14px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

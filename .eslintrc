@@ -1,0 +1,137 @@
+{
+  "extends": ["plugin:vue/recommended", "airbnb-base"],
+  // "extends": ["plugin:testing-library/vue"],
+  "env": {
+    "es2021": true,
+    "browser": true
+  },
+  "parserOptions": {
+    "parser": "@babel/eslint-parser",
+    "sourceType": "module",
+    "allowImportExportEverywhere": true,
+    "requireConfigFile": false,
+    "babelOptions": {
+      "presets": ["vue"]
+    }
+  },
+  "rules": {
+    "import/extensions": [
+      "error",
+      "always",
+      {
+        "js": "never",
+        "vue": "never",
+        "scss": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
+    "indent": [
+      "warn",
+      2,
+      {
+        "SwitchCase": 1
+      }
+    ],
+    "vue/script-indent": [
+      "warn",
+      2,
+      {
+        "baseIndent": 1,
+        "switchCase": 1
+      }
+    ],
+    "vue/no-multiple-template-root": "off",
+    "vue/html-indent": [
+      "warn",
+      2,
+      {
+        "baseIndent": 1
+      }
+    ],
+    // "vuetify/no-deprecated-classes": "error",
+    "vue/attribute-hyphenation": "off",
+    "vue/html-self-closing": "off",
+    "vue/multi-word-component-names": "off",
+    "vue/no-v-for-template-key": "off",
+    "vue/no-v-for-template-key-on-child": ["error"],
+    "vue/html-closing-bracket-spacing": ["error"],
+    "vue/max-attributes-per-line": ["warn", {
+      "singleline": 2,
+      "multiline": 2
+    }],
+    "max-len": [
+      "warn",
+      {
+        "code": 250
+      }
+    ],
+    "arrow-parens": [
+      "off"
+    ],
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "compat/compat": "warn",
+    "consistent-return": "off",
+    "comma-dangle": "off",
+    "generator-star-spacing": "off",
+    "import/no-unresolved": "error",
+    "import/no-extraneous-dependencies": "off",
+    "import/no-named-as-default": "off",
+    "import/no-named-as-default-member": "off",
+    "no-console": "off",
+    "no-use-before-define": "off",
+    "no-multi-assign": "off",
+    "prefer-template": "off",
+    "promise/param-names": "error",
+    "promise/always-return": "warn",
+    "promise/catch-or-return": "warn",
+    "promise/no-native": "off",
+    "no-shadow": "off",
+    "linebreak-style": 0,
+    "array-bracket-spacing": "off",
+    "function-paren-newline": "off",
+    "camelcase": "off",
+    "no-nested-ternary": "off",
+    "no-case-declarations": "off",
+    "object-curly-newline": [
+      "off"
+    ],
+    "no-param-reassign": "off",
+    "no-unused-vars": "warn",
+    "template-curly-spacing" : "off"
+  },
+  "globals": {
+    "__DEV__": true
+  },
+  "plugins": ["vue", "import", "promise", "compat"],
+  // "plugins": ["vuetify", "testing-library"],
+  "settings": {
+    "polyfills": ["Promise", "fetch"],
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      "alias": {
+        "map": [
+          ["@", "./src"]
+        ],
+        "extensions": [".js", ".vue", ".tsx"]
+      },
+      "typescript": {
+        "alwaysTryTypes": true
+      },
+      "node": {
+        "extensions": [".js", ".vue", ".scss", ".ts", ".tsx"]
+      }
+    }
+  },
+  "overrides": [{
+    "files": ["*.vue"],
+    "rules": {
+      "indent": "off"
+    }
+  }]
+}
