@@ -27,32 +27,11 @@ export const isObj = val => typeof val === 'object' && !isArr(val) && !isNull(va
 export const isNum = val => typeof val === 'number' && !Number.isNaN(val);
 
 /**
-* @description Is function
-* @param val
-* @returns {boolean}
-*/
-export const isFunc = val => typeof val === 'function';
-
-/**
 * @description Is string
 * @param val
 * @returns {boolean}
 */
 export const isStr = val => typeof val === 'string';
-
-/**
-* @description Is undefined
-* @param val
-* @returns {boolean}
-*/
-export const isUndef = val => typeof val === 'undefined';
-
-/**
-* @description Is boolean
-* @param val
-* @returns {boolean}
-*/
-export const isBool = val => typeof val === 'boolean';
 
 /**
 * @description Is non empty string

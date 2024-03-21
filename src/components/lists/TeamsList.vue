@@ -4,6 +4,7 @@
   import { useUserStore } from '@/stores/user';
 
   import WidgetRow from '@/components/base/WidgetRow';
+  import Button from '@/components/base/Button';
 
   // eslint-disable-next-line import/no-unresolved
   import SvgStadium from '@/assets/svg/stadium.svg?component';
@@ -55,9 +56,9 @@
       </div>
 
       <template #actions>
-        <button @click.prevent="toggleTeamFollow(team.id)">
-          {{ followedIds.includes(team.id) ? 'Unfollow' : 'Follow' }}
-        </button>
+        <Button :is-selected="followedIds.includes(team.id)" @click.prevent="toggleTeamFollow(team.id)">
+          {{ followedIds.includes(team.id) ? 'Following' : 'Follow' }}
+        </Button>
       </template>
     </WidgetRow>
   </div>

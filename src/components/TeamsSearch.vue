@@ -1,5 +1,5 @@
 <script setup>
-  import { ref, computed } from 'vue';
+  import { ref, computed, inject } from 'vue';
   import { storeToRefs } from 'pinia';
   import { isNum, isNonEmptyStr, isNonEmptyArr } from '@/utils';
 
@@ -17,7 +17,7 @@
   const { getTeamsList: teamsList } = storeToRefs(useTeamsStore());
   const searchQuery = ref('');
   const resFocusIndex = ref(-1);
-  const requiredQueryLenght = 1;
+  const requiredQueryLenght = inject(['$config']).minQueryLength;
 
   const areTeamsSet = computed(() => isNonEmptyArr(teamsList.value));
   const searchResults = computed(() => (

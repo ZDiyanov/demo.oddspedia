@@ -65,6 +65,7 @@
       background: $bg-softgrey;
       border: 0;
       border-radius: 18px;
+      outline-color: $lightblue;
 
       &--with-lead { padding-left: 36px; }
     }
