@@ -1,4 +1,4 @@
-<script setup>
+<script>
   import UsernameLabel from '@/components/base/UsernameLabel';
   import TeamsSearch from '@/components/TeamsSearch';
   import SubscriptionList from '@/components/lists/SubscriptionsList';
@@ -16,6 +16,19 @@
       isActive: false,
     },
   ];
+
+  export default {
+    components: {
+      UsernameLabel,
+      TeamsSearch,
+      SubscriptionList,
+    },
+    data() {
+      return {
+        tabList,
+      };
+    },
+  };
 </script>
 
 <template>
