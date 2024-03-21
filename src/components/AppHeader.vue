@@ -1,4 +1,4 @@
-<script setup>
+<script>
   import UsernameLabel from '@/components/base/UsernameLabel';
 
   // eslint-disable-next-line import/no-unresolved
@@ -9,6 +9,16 @@
   import SvgLogo from '@/assets/svg/logo.svg?component';
   // eslint-disable-next-line import/no-unresolved
   import SvgLogoLarge from '@/assets/svg/logoLarge.svg?component';
+
+  export default {
+    components: {
+      UsernameLabel,
+      SvgArrowLeft,
+      SvgNotification,
+      SvgLogo,
+      SvgLogoLarge,
+    },
+  };
 </script>
 
 <template>
