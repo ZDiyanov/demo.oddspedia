@@ -1,16 +1,28 @@
-<script setup>
-  import { onMounted } from 'vue';
+<script>
   import { useHead } from '@unhead/vue';
 
   import { useTeamsStore } from '@/stores/teams';
 
   import UserProfile from '@/components/UserProfile';
 
-  useHead({ title: 'Team Search Widget Demo' });
+  export default {
+    components: { UserProfile },
+    setup() {
+      const teamsStore = useTeamsStore();
 
-  const { getTeams } = useTeamsStore();
+      useHead({ title: 'Team Search Widget Demo' });
 
-  onMounted(() => getTeams());
+      return { teamsStore };
+    },
+    mounted() {
+      this.getTeams();
+    },
+    methods: {
+      getTeams() {
+        this.teamsStore.getTeams();
+      },
+    },
+  };
 </script>
 
 <template>
