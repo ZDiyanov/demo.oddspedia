@@ -1,10 +1,12 @@
-<script setup>
-  defineProps({
-    isSelected: {
-      type: Boolean,
-      default: false,
+<script>
+  export default {
+    props: {
+      isSelected: {
+        type: Boolean,
+        default: false,
+      },
     },
-  });
+  };
 </script>
 
 <template>
