@@ -2,6 +2,20 @@
   import UsernameLabel from '@/components/base/UsernameLabel';
   import TeamsSearch from '@/components/TeamsSearch';
   import SubscriptionList from '@/components/lists/SubscriptionsList';
+
+  // DEV Note: we prep the tabs array cause we can directly use it if we want to extract the tabs as a reusable component later
+  const tabList = [
+    {
+      id: 1,
+      label: 'My Teams',
+      isActive: true,
+    },
+    {
+      id: 2,
+      label: 'About',
+      isActive: false,
+    },
+  ];
 </script>
 
 <template>
@@ -11,7 +25,12 @@
         <UsernameLabel class="user-profile__username-label" />
       </div>
       <div class="user-profile__tabnav">
-        tabnav
+        <a
+          v-for="tab in tabList" :key="tab.id"
+          href="#" :class="['user-profile__tab-btn', { 'user-profile__tab-btn--selected': tab.isActive }]"
+        >
+          {{ tab.label }}
+        </a>
       </div>
     </div>
     <div class="widget-teams">
@@ -70,19 +89,42 @@
       display: flex;
       justify-self: center;
       align-self: flex-end;
-      background: red;
+    }
+
+    &__tab-btn {
+      position: relative;
+      display: block;
+      height: 34px;
+      line-height: 32px;
+      margin: 0 5px;
+      padding: 0 5px;
+      font-size: 11px;
+      font-weight: 500;
+      color: $text-secondary;
+      text-decoration: none;
+      text-transform: uppercase;
+
+      &::before {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: none;
+        width: 100%;
+        height: 3px;
+        background: $bg-lightblue;
+        border-radius: 3px 3px 0 0;
+        content: '';
+      }
+
+      &--selected {
+        color: $text-white;
+
+        &::before { display: block; }
+      }
     }
 
     .widget-teams {
-
-      // @include sm {
-      //   height: auto;
-      //   overflow: hidden;
-      //   margin-bottom: 10px;
-      //   border-radius: 8px;
-      //   box-shadow: 0 0 10px $shadow-grey;
-      // }
-
       &__block {
         padding-bottom: 8px;
         margin-bottom: 8px;
