@@ -1,17 +1,28 @@
-<script setup>
-  import { computed } from 'vue';
-  import { storeToRefs } from 'pinia';
+<script>
   import { isNum } from '@/utils';
 
   import { useUserStore } from '@/stores/user';
 
-  const {
-    getId: id,
-    getFirstname: firstname,
-    getLastname: lastname,
-  } = storeToRefs(useUserStore());
-
-  const isUserSet = computed(() => isNum(id.value));
+  export default {
+    setup() {
+      const userStore = useUserStore();
+      return { userStore };
+    },
+    computed: {
+      userId() {
+        return this.userStore.getId;
+      },
+      firstname() {
+        return this.userStore.getFirstname;
+      },
+      lastname() {
+        return this.userStore.getLastname;
+      },
+      isUserSet() {
+        return isNum(this.userId);
+      },
+    },
+  };
 </script>
 
 <template>
