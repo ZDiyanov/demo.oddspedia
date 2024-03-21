@@ -1,6 +1,5 @@
-<script setup>
-  import { ref, computed, inject } from 'vue';
-  import { storeToRefs } from 'pinia';
+<script>
+  import { inject } from 'vue';
   import { isNum, isNonEmptyStr, isNonEmptyArr } from '@/utils';
 
   import { useTeamsStore } from '@/stores/teams';
@@ -14,39 +13,61 @@
   // eslint-disable-next-line import/no-unresolved
   import SvgNoResults from '@/assets/svg/noResults.svg?component';
 
-  const { getTeamsList: teamsList } = storeToRefs(useTeamsStore());
-  const searchQuery = ref('');
-  const resFocusIndex = ref(-1);
-  const requiredQueryLenght = inject(['$config']).minQueryLength;
-
-  const areTeamsSet = computed(() => isNonEmptyArr(teamsList.value));
-  const searchResults = computed(() => (
-    teamsList.value.filter((item) => [item.name, item.stadium, ...item.leagues]
-      .map((term) => term.toLowerCase())
-      .some((term) => term.includes(searchQuery.value.toLowerCase()))
-    )
-  ));
-  const hasSearchResults = computed(() => (
-    isNonEmptyStr(searchQuery.value)
-    && searchQuery.value.length >= requiredQueryLenght
-    && isNonEmptyArr(searchResults.value))
-  );
-
-  const onSearchClear = () => {
-    searchQuery.value = '';
-  };
-  const setFocusIndex = (index) => {
-    resFocusIndex.value = isNum(index) ? index : -1;
-  };
-  const decrementFocusIndex = () => {
-    if (resFocusIndex.value > 0) {
-      resFocusIndex.value -= 1;
-    }
-  };
-  const incrementFocusIndex = () => {
-    if (resFocusIndex.value < searchResults.value.length - 1) {
-      resFocusIndex.value += 1;
-    }
+  export default {
+    components: {
+      SearchInput,
+      WidgetBlock,
+      TeamsList,
+      SvgSearch,
+      SvgNoResults,
+    },
+    setup() {
+      const teamsStore = useTeamsStore();
+      const requiredQueryLenght = inject(['$config']).minQueryLength;
+      return { teamsStore, requiredQueryLenght };
+    },
+    data() {
+      return {
+        searchQuery: '',
+        resFocusIndex: -1,
+      };
+    },
+    computed: {
+      teamsList() {
+        return this.teamsStore.getTeamsList;
+      },
+      areTeamsSet() {
+        return isNonEmptyArr(this.teamsList);
+      },
+      searchResults() {
+        return this.teamsList.filter((item) => [item.name, item.stadium, ...item.leagues]
+          .map((term) => term.toLowerCase())
+          .some((term) => term.includes(this.searchQuery.toLowerCase())));
+      },
+      hasSearchResults() {
+        return isNonEmptyStr(this.searchQuery)
+          && this.searchQuery.length >= this.requiredQueryLenght
+          && isNonEmptyArr(this.searchResults);
+      },
+    },
+    methods: {
+      onSearchClear() {
+        this.searchQuery = '';
+      },
+      setFocusIndex(index) {
+        this.resFocusIndex = isNum(index) ? index : -1;
+      },
+      decrementFocusIndex() {
+        if (this.resFocusIndex > 0) {
+          this.resFocusIndex -= 1;
+        }
+      },
+      incrementFocusIndex() {
+        if (this.resFocusIndex < this.searchResults.length - 1) {
+          this.resFocusIndex += 1;
+        }
+      },
+    },
   };
 </script>
 
