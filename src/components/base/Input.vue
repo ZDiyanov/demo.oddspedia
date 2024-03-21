@@ -1,28 +1,30 @@
-<script setup>
-  import { computed } from 'vue';
-
+<script>
   // eslint-disable-next-line import/no-unresolved
   import SvgClose from '@/assets/svg/close.svg?component';
 
-  defineProps({
-    placeholder: {
-      type: String,
-      default: 'Type here ...'
+  export default {
+    components: { SvgClose },
+    props: {
+      modelValue: {
+        type: String,
+        required: true,
+      },
+      placeholder: {
+        type: String,
+        default: 'Type here ...'
+      },
+      hasLeadIcon: {
+        type: Boolean,
+        default: false,
+      },
     },
-    hasLeadIcon: {
-      type: Boolean,
-      default: false,
+    emits: ['update:modelValue', 'input:clear', 'input:focusout', 'input:key-up', 'input:key-down'],
+    computed: {
+      hasInputVal() {
+        return this.modelValue.length !== 0;
+      },
     },
-  });
-
-  const model = defineModel({
-    type: String,
-    required: true,
-  });
-
-  defineEmits(['input:clear', 'input:focusout', 'input:key-up', 'input:key-down']);
-
-  const hasInputVal = computed(() => model.value.length !== 0);
+  };
 </script>
 
 <template>
@@ -34,9 +36,10 @@
       <slot />
     </div>
     <input
-      v-model="model"
+      :value="modelValue"
       type="text" :placeholder="placeholder"
       :class="['input-basic__input', { 'input-basic__input--with-lead': hasLeadIcon }]"
+      @input="$emit('update:modelValue', $event.target.value)"
       @focusout.prevent="$emit('input:focusout')"
       @keydown.up.prevent="$emit('input:key-up')"
       @keydown.down.prevent="$emit('input:key-down')"
