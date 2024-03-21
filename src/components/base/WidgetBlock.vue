@@ -1,15 +1,19 @@
-<script setup>
-  import { computed } from 'vue';
+<script>
   import { isNonEmptyStr } from '@/utils';
 
-  const props = defineProps({
-    title: {
-      type: String,
-      default: '',
+  export default {
+    props: {
+      title: {
+        type: String,
+        default: '',
+      },
     },
-  });
-
-  const hasTitle = computed(() => isNonEmptyStr(props.title));
+    computed: {
+      hasTitle() {
+        return isNonEmptyStr(this.title);
+      },
+    },
+  };
 </script>
 
 <template>
@@ -37,9 +41,5 @@
       font-style: italic;
       color: $text-primary;
     }
-
-    // &__content {
-    //   padding: 0 15px;
-    // }
   }
 </style>
