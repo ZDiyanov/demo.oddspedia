@@ -7,16 +7,21 @@
 
   import SearchInput from '@/components/base/Input';
   import WidgetBlock from '@/components/base/WidgetBlock';
-  import TeamsList from '@/components/TeamsList';
+  import TeamsList from '@/components/lists/TeamsList';
 
-  const { teamList } = storeToRefs(useTeamsStore());
+  // eslint-disable-next-line import/no-unresolved
+  import SvgSearch from '@/assets/svg/search.svg?component';
+  // eslint-disable-next-line import/no-unresolved
+  import SvgNoResults from '@/assets/svg/noResults.svg?component';
+
+  const { getTeamsList: teamsList } = storeToRefs(useTeamsStore());
   const searchQuery = ref('');
   const resFocusIndex = ref(-1);
   const requiredQueryLenght = 1;
 
-  const areTeamsSet = computed(() => isNonEmptyArr(teamList.value));
+  const areTeamsSet = computed(() => isNonEmptyArr(teamsList.value));
   const searchResults = computed(() => (
-    teamList.value.filter((item) => [item.name, item.stadium, ...item.leagues]
+    teamsList.value.filter((item) => [item.name, item.stadium, ...item.leagues]
       .map((term) => term.toLowerCase())
       .some((term) => term.includes(searchQuery.value.toLowerCase()))
     )
@@ -51,10 +56,12 @@
       <SearchInput
         v-if="areTeamsSet"
         v-model="searchQuery" class="teams-search__input"
-        placeholder="Search for a team"
+        placeholder="Search for a team" has-lead-icon
         @input:clear="onSearchClear" @input:focusout="setFocusIndex"
         @input:key-up="decrementFocusIndex" @input:key-down="incrementFocusIndex"
-      />
+      >
+        <SvgSearch />
+      </SearchInput>
     </div>
 
     <TeamsList
@@ -64,13 +71,13 @@
     />
 
     <div v-if="searchQuery.length >= requiredQueryLenght && !hasSearchResults" class="teams-search__empty">
-      <img src="/img/no-results.png">
+      <SvgNoResults />
       <span>No Teams Found</span>
     </div>
   </WidgetBlock>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
   .teams-search {
     &__input-wrap {
       padding: 0 15px;
@@ -86,7 +93,7 @@
       align-items: center;
       padding: 10px 0;
 
-      img {
+      svg {
         width: 144px;
         height: 78px;
         margin-bottom: 10px;

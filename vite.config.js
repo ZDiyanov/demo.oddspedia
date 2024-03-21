@@ -2,10 +2,11 @@ import { fileURLToPath, URL } from 'node:url';
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import eslint from 'vite-plugin-eslint';
+import svgLoader from 'vite-svg-loader';
 import postcssConfig from './postcss.config';
 
 export default defineConfig({
-  plugins: [vue(), eslint()],
+  plugins: [vue(), eslint(), svgLoader()],
   resolve: {
     extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.vue'],
     alias: {

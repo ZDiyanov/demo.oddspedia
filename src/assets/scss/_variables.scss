@@ -1,12 +1,21 @@
-$bg-white: #FFFFFF;
-$bg-grey: #E1E7ED;
+$white: #FFFFFF;
+$grey: #E1E7ED;
+$lightblue: #00B1FF;
+$softblue: #1E3554;
+
+$bg-white: $white;
+$bg-grey: $grey;
 $bg-softgrey: #F5F7F9;
 $bg-blue: #112948;
-$bg-softblue: #1E3554;
-$bg-lightblue: #00B1FF;
+$bg-softblue: $softblue;
+$bg-lightblue: $lightblue;
 
-$shadow-grey: #E1E7ED;
+$shadow-grey: $grey;
+
+$border-softblue: $softblue;
 
 $text-primary: #1A3150;
 $text-secondary: #6F8CAA;
-$text-highlight: #00B1FF;
+$text-highlight: $lightblue;
+$text-white: $white;
+$text-grey: $grey;

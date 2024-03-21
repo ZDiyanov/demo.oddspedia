@@ -5,6 +5,9 @@
 
   import WidgetRow from '@/components/base/WidgetRow';
 
+  // eslint-disable-next-line import/no-unresolved
+  import SvgStadium from '@/assets/svg/stadium.svg?component';
+
   const { getFollowed: followedIds } = storeToRefs(useUserStore());
 
   const { toggleTeamFollow } = useUserStore();
@@ -47,7 +50,8 @@
       </div>
       <div class="team-details__row">
         <span class="team-details__label--name" v-html="$filters.highlight(team.name, marker)" />
-        <span class="team-details__label--stadium"> | <span v-html="$filters.highlight(team.stadium, marker)" /></span>
+        <span class="team-details__label--divider">|</span>
+        <span class="team-details__label--stadium"><SvgStadium /> <span v-html="$filters.highlight(team.stadium, marker)" /></span>
       </div>
 
       <template #actions>
@@ -59,7 +63,7 @@
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
   .team-details {
     &__item {
       &--focused { background: $bg-softgrey; }
@@ -77,12 +81,25 @@
       color: $text-secondary;
 
       &--leagues { font-size: 11px; }
+
       &--name {
         font-size: 14px;
         font-weight: 500;
         color: $text-primary;
       }
-      &--stadium { font-size: 12px; }
+
+      &--stadium {
+        font-size: 12px;
+
+        svg { margin: 0 2px; vertical-align: text-top; }
+      }
+
+      &--divider {
+        margin: 0 5px;
+        font-size: 11px;
+        font-weight: bold;
+        color: $text-grey;
+      }
     }
 
     &__icon {
@@ -90,7 +107,7 @@
       height: 28px;
     }
 
-    span.substr--highlighted {
+    ::v-deep span.substr--highlighted {
       color: $text-highlight;
     }
   }

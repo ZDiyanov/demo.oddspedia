@@ -9,10 +9,10 @@
   import WidgetRow from '@/components/base/WidgetRow';
 
   const { getFollowed: followedIds } = storeToRefs(useUserStore());
-  const { teamList } = storeToRefs(useTeamsStore());
+  const { getTeamsList: teamsList } = storeToRefs(useTeamsStore());
 
   const followedTeams = computed(() => (
-    teamList.value
+    teamsList.value
       .filter((item) => followedIds.value.includes(item.id))
       .map(({ id, name }) => ({ id, name }))
   ));
@@ -30,7 +30,7 @@
         </template>
 
         <div class="team-details__row">
-          <span class="team-details__label--name">{{ team.name }}</span>
+          <span class="team-details__label">{{ team.name }}</span>
         </div>
       </WidgetRow>
     </template>
@@ -40,7 +40,7 @@
   </WidgetBlock>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
   .team-details {
     &__row {
       margin-bottom: 4px;

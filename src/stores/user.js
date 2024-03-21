@@ -12,6 +12,7 @@ const isValid = (user) => isObj(user)
   && isNull(user.id)
   && !isNonEmptyStr(user.firstname)
   && !isNonEmptyStr(user.lastname)
+  && isNull(user.level)
   && !isNonEmptyArr(user.followed);
 
 /**
@@ -24,11 +25,12 @@ const initState = (initialState) => {
     throw Error('Invalid initial user store state');
   }
 
-  const { id, firstname, lastname, followed } = initialState;
+  const { id, firstname, lastname, level, followed } = initialState;
   return () => ({
     id,
     firstname,
     lastname,
+    level,
     followed,
   });
 };
@@ -37,6 +39,7 @@ const getters = {
   getId: ({ id }) => id,
   getFirstname: ({ firstname }) => firstname,
   getLastname: ({ lastname }) => lastname,
+  getLevel: ({ level }) => level,
   getFollowed: ({ followed }) => followed,
 };
 
@@ -46,12 +49,14 @@ const actions = {
       id: 1,
       firstname: 'Richy',
       lastname: 'Rich',
+      level: 5,
       followed: [],
     };
 
     this.id = nextUser.id;
     this.firstname = nextUser.firstname;
     this.lastname = nextUser.lastname;
+    this.level = nextUser.level;
     this.followed = nextUser.followed;
   },
   toggleTeamFollow(nextId) {

@@ -11,7 +11,7 @@
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
   .layout-basic {
     display: flex;
     flex-direction: column;

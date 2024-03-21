@@ -1,10 +1,17 @@
 <script setup>
   import { computed } from 'vue';
 
+  // eslint-disable-next-line import/no-unresolved
+  import SvgClose from '@/assets/svg/close.svg?component';
+
   defineProps({
     placeholder: {
       type: String,
       default: 'Type here ...'
+    },
+    hasLeadIcon: {
+      type: Boolean,
+      default: false,
     },
   });
 
@@ -20,33 +27,30 @@
 
 <template>
   <div class="input-basic">
+    <div
+      v-if="hasLeadIcon"
+      class="input-basic__icon input-basic__icon--lead" @click.prevent="$emit('input:clear')"
+    >
+      <slot />
+    </div>
     <input
       v-model="model"
       type="text" :placeholder="placeholder"
-      class="input-basic__input"
+      :class="['input-basic__input', { 'input-basic__input--with-lead': hasLeadIcon }]"
       @focusout.prevent="$emit('input:focusout')"
       @keydown.up.prevent="$emit('input:key-up')"
       @keydown.down.prevent="$emit('input:key-down')"
     />
     <a
       v-if="hasInputVal"
-      class="input-basic__clear" @click.prevent="$emit('input:clear')"
+      class="input-basic__icon input-basic__icon--clear" @click.prevent="$emit('input:clear')"
     >
-      <svg
-        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12"
-        width="12" height="12"
-      >
-        <path
-          id="close"
-          d="M7.1,6.136l4.673-4.673a.777.777,0,0,0-1.1-1.1L6,5.037,1.327.364a.777.777,0,0,0-1.1,1.1L4.9,6.136.228,10.809a.777.777,0,1,0,1.1,1.1L6,7.235l4.673,4.673a.777.777,0,1,0,1.1-1.1Zm0,0"
-          transform="translate(0 -0.136)" fill="#98acc1"
-        />
-      </svg>
+      <SvgClose />
     </a>
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
   .input-basic {
     position: relative;
     width: 100%;
@@ -61,21 +65,24 @@
       background: $bg-softgrey;
       border: 0;
       border-radius: 18px;
+
+      &--with-lead { padding-left: 36px; }
     }
 
-    &__clear {
+    &__icon {
       position: absolute;
       z-index: 2;
       top: 0;
       bottom: 0;
-      right: 10px;
       display: flex;
       justify-content: center;
       align-items: center;
       width: 18px;
       height: 18px;
       margin: auto;
-      cursor: pointer;
+
+      &--lead { left: 10px; pointer-events: none; }
+      &--clear { right: 10px; cursor: pointer; }
     }
   }
 </style>

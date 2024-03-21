@@ -27,7 +27,7 @@
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
   .widget-row {
     display: flex;
     padding: 0 15px;

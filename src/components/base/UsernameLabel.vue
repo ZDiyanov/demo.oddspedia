@@ -5,11 +5,15 @@
 
   import { useUserStore } from '@/stores/user';
 
-  const { getId, getFirstname, getLastname } = storeToRefs(useUserStore());
+  const {
+    getId: id,
+    getFirstname: firstname,
+    getLastname: lastname,
+  } = storeToRefs(useUserStore());
 
-  const isUserSet = computed(() => isNum(getId.value));
+  const isUserSet = computed(() => isNum(id.value));
 </script>
 
 <template>
-  <span v-if="isUserSet">{{ getFirstname }} {{ getLastname }}</span>
+  <span v-if="isUserSet">{{ firstname + lastname }}</span>
 </template>

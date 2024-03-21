@@ -24,7 +24,7 @@ const initState = (initialState) => {
 };
 
 const getters = {
-  teamList: (state) => Object.values(state.$state).map((team) => team),
+  getTeamsList: (state) => Object.values(state.$state).map((team) => team),
 };
 
 const actions = {
