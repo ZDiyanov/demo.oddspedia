@@ -22,16 +22,21 @@
   <div class="user-profile">
     <div class="user-profile__header">
       <div class="user-profile__avatar">
+        <div class="user-profile__user-img" style="background-image: url('/img/demo-avatar.png');">
+          <div class="user-profile__level-pill">
+            Level 5
+          </div>
+        </div>
         <UsernameLabel class="user-profile__username-label" />
       </div>
-      <div class="user-profile__tabnav">
-        <a
-          v-for="tab in tabList" :key="tab.id"
-          href="#" :class="['user-profile__tab-btn', { 'user-profile__tab-btn--selected': tab.isActive }]"
-        >
-          {{ tab.label }}
-        </a>
-      </div>
+    </div>
+    <div class="user-profile__tabnav">
+      <a
+        v-for="tab in tabList" :key="tab.id"
+        href="#" :class="['user-profile__tab-btn', { 'user-profile__tab-btn--selected': tab.isActive }]"
+      >
+        {{ tab.label }}
+      </a>
     </div>
     <div class="widget-teams">
       <TeamsSearch class="widget-teams__block widget-teams__block" />
@@ -56,39 +61,73 @@
     }
 
     &__header {
-      display: grid;
+      display: flex;
       flex-direction: column;
+      justify-content: center;
       width: 100%;
-      height: 190px;
-      margin-bottom: 8px;
+      height: 150px;
       background: $bg-blue;
 
-      @include sm { margin-bottom: 0; }
+      @include sm {
+        align-items: flex-start;
+      }
     }
 
     &__avatar {
+      position: relative;
       display: flex;
-      justify-self: flex-start;
-      align-self: center;
-      // background: red;
+      justify-content: center;
+      align-items: center;
+
+      @include sm {
+        margin-left: 42px;
+      }
+    }
+
+    &__user-img {
+      display: flex;
+      justify-content: center;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background-position: top center;
+    }
+
+    &__level-pill {
+      position: absolute;
+      bottom: -20px;
+      height: 16px;
+      line-height: 16px;
+      padding: 0 8px;
+      background: $bg-softblue;
+      font-family: 'Montserrat', 'Roboto', 'Arial', -apple-system, sans-serif;
+      font-size: 9px;
+      font-weight: bold;
+      color: $text-white;
+      border-radius: 8px;
     }
 
     &__username-label {
+      display: none;
+      margin-left: 20px;
       font-family: 'Montserrat', 'Roboto', 'Arial', -apple-system, sans-serif;
       font-size: 16px;
       font-weight: bold;
       font-style: italic;
       color: $text-white;
 
-      // @include lg {
-      //   display: none;
-      // }
+      @include sm {
+        display: block;
+      }
     }
 
     &__tabnav {
       display: flex;
-      justify-self: center;
-      align-self: flex-end;
+      justify-content: center;
+      margin-bottom: 8px;
+      background: $bg-blue;
+
+      @include sm { margin-bottom: 0; }
     }
 
     &__tab-btn {

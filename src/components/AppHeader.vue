@@ -43,9 +43,8 @@
 
 <style lang="scss" scoped>
   .header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    display: grid;
+    grid-auto-flow: column;
     align-items: center;
     width: 100%;
     height: 55px;
@@ -57,14 +56,22 @@
       padding: 0 25px;
     }
 
-    &__side { display: flex; align-items: center; }
+    &__center { position: absolute; justify-self: center; }
+
+    &__side {
+      display: flex;
+      align-items: center;
+
+      &:first-child { justify-self: start; }
+      &:last-child { justify-self: end; }
+    }
 
     &__logo {
       margin-left: 10px;
 
       &-large  { display: none; }
 
-      @include lg {
+      @include sm {
         &-small { display: none; }
         &-large  { display: block; }
       }
@@ -100,7 +107,7 @@
       font-style: italic;
       color: $text-white;
 
-      @include lg {
+      @include sm {
         display: none;
       }
     }
