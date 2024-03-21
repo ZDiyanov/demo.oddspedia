@@ -1,5 +1,4 @@
-<script setup>
-  import { onMounted } from 'vue';
+<script>
   import { useHead } from '@unhead/vue';
   import { isNull } from '@/utils';
 
@@ -8,11 +7,31 @@
   import BaseLayout from '@/components/layouts/Basic';
   import HomeView from '@/views/Home';
 
-  useHead({ titleTemplate: (title) => (title ? `Oddspedia - ${title}` : 'Oddspedia'), });
+  export default {
+    components: { BaseLayout, HomeView },
+    setup() {
+      const userStore = useUserStore();
 
-  const { getId, setUser } = useUserStore();
+      useHead({ titleTemplate: (title) => (title ? `Oddspedia - ${title}` : 'Oddspedia'), });
 
-  onMounted(() => { if (isNull(getId)) setUser(); });
+      return { userStore };
+    },
+    computed: {
+      userId() {
+        return this.userStore.getId;
+      },
+    },
+    mounted() {
+      if (isNull(this.userId)) {
+        this.setUser();
+      }
+    },
+    methods: {
+      setUser() {
+        this.userStore.setUser();
+      },
+    },
+  };
 </script>
 
 <template>
