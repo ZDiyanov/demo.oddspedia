@@ -1,16 +1,17 @@
-<script setup>
-  defineProps({
-    hasLeadIcon: {
-      type: Boolean,
-      default: false,
+<script>
+  export default {
+    props: {
+      hasLeadIcon: {
+        type: Boolean,
+        default: false,
+      },
+      hasActions: {
+        type: Boolean,
+        default: false,
+      },
     },
-    hasActions: {
-      type: Boolean,
-      default: false,
-    },
-  });
-
-  defineEmits(['list:mouseover', 'list:mouseleave']);
+    emits: ['list:mouseover', 'list:mouseleave'],
+  };
 </script>
 
 <template>
