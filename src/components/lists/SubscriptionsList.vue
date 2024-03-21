@@ -1,21 +1,31 @@
-<script setup>
-  import { computed } from 'vue';
-  import { storeToRefs } from 'pinia';
-
+<script>
   import { useUserStore } from '@/stores/user';
   import { useTeamsStore } from '@/stores/teams';
 
   import WidgetBlock from '@/components/base/WidgetBlock';
   import WidgetRow from '@/components/base/WidgetRow';
 
-  const { getFollowed: followedIds } = storeToRefs(useUserStore());
-  const { getTeamsList: teamsList } = storeToRefs(useTeamsStore());
-
-  const followedTeams = computed(() => (
-    teamsList.value
-      .filter((item) => followedIds.value.includes(item.id))
-      .map(({ id, name }) => ({ id, name }))
-  ));
+  export default {
+    components: { WidgetBlock, WidgetRow },
+    setup() {
+      const userStore = useUserStore();
+      const teamsStore = useTeamsStore();
+      return { userStore, teamsStore };
+    },
+    computed: {
+      followedIds() {
+        return this.userStore.getFollowed;
+      },
+      teamsList() {
+        return this.teamsStore.getTeamsList;
+      },
+      followedTeams() {
+        return this.teamsList
+          .filter((item) => this.followedIds.includes(item.id))
+          .map(({ id, name }) => ({ id, name }));
+      },
+    },
+  };
 </script>
 
 <template>
