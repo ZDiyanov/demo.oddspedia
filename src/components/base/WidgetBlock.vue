@@ -32,14 +32,10 @@
       align-items: center;
       height: 50px;
       padding: 0 15px;
-      font-family: 'Montserrat', 'Roboto', 'Arial', -apple-system, sans-serif;
+      font-family: $font-highlight;
       font-weight: bold;
       font-style: italic;
       color: $text-primary;
     }
-
-    // &__content {
-    //   padding: 0 15px;
-    // }
   }
 </style>

@@ -100,7 +100,7 @@
       line-height: 16px;
       padding: 0 8px;
       background: $bg-softblue;
-      font-family: 'Montserrat', 'Roboto', 'Arial', -apple-system, sans-serif;
+      font-family: $font-highlight;
       font-size: 9px;
       font-weight: bold;
       color: $text-white;
@@ -110,7 +110,7 @@
     &__username-label {
       display: none;
       margin-left: 20px;
-      font-family: 'Montserrat', 'Roboto', 'Arial', -apple-system, sans-serif;
+      font-family: $font-highlight;
       font-size: 16px;
       font-weight: bold;
       font-style: italic;

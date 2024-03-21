@@ -92,7 +92,7 @@
         background: $bg-lightblue;
         border: 2px solid $border-softblue;
         border-radius: 9px;
-        font-family: 'Montserrat', 'Roboto', 'Arial', -apple-system, sans-serif;
+        font-family: $font-highlight;
         font-size: 9px;
         font-weight: bold;
         font-style: italic;
@@ -101,7 +101,7 @@
     }
 
     &__username-label {
-      font-family: 'Montserrat', 'Roboto', 'Arial', -apple-system, sans-serif;
+      font-family: $font-highlight;
       font-size: 15px;
       font-weight: bold;
       font-style: italic;
