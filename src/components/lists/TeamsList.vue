@@ -1,34 +1,48 @@
-<script setup>
-  import { storeToRefs } from 'pinia';
-
+<script>
   import { useUserStore } from '@/stores/user';
 
   import WidgetRow from '@/components/base/WidgetRow';
-  import Button from '@/components/base/Button';
+  import Btn from '@/components/base/Button';
 
   // eslint-disable-next-line import/no-unresolved
   import SvgStadium from '@/assets/svg/stadium.svg?component';
 
-  const { getFollowed: followedIds } = storeToRefs(useUserStore());
-
-  const { toggleTeamFollow } = useUserStore();
-
-  defineProps({
-    teams: {
-      type: Array,
-      required: true,
+  export default {
+    components: {
+      WidgetRow,
+      Btn,
+      SvgStadium,
     },
-    marker: {
-      type: String,
-      default: '',
+    props: {
+      teams: {
+        type: Array,
+        required: true,
+      },
+      marker: {
+        type: String,
+        default: '',
+      },
+      focusedIndex: {
+        type: Number,
+        default: -1,
+      },
     },
-    focusedIndex: {
-      type: Number,
-      default: -1,
+    emits: ['list:mouseover', 'list:mouseleave'],
+    setup() {
+      const userStore = useUserStore();
+      return { userStore };
     },
-  });
-
-  defineEmits(['list:mouseover', 'list:mouseleave']);
+    computed: {
+      followedIds() {
+        return this.userStore.getFollowed;
+      },
+    },
+    methods: {
+      toggleTeamFollow(id) {
+        this.userStore.toggleTeamFollow(id);
+      },
+    },
+  };
 </script>
 
 <template>
@@ -56,9 +70,9 @@
       </div>
 
       <template #actions>
-        <Button :is-selected="followedIds.includes(team.id)" @click.prevent="toggleTeamFollow(team.id)">
+        <Btn :is-selected="followedIds.includes(team.id)" @click.prevent="toggleTeamFollow(team.id)">
           {{ followedIds.includes(team.id) ? 'Following' : 'Follow' }}
-        </Button>
+        </Btn>
       </template>
     </WidgetRow>
   </div>
